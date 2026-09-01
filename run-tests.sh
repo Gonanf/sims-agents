@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
-# run-tests.sh — ejecuta TODO el suite automatizado sin intervención.
-# Dependencias: bun, dotnet, python3, pytest, mcs, mono
+# run-tests.sh — suite completo de QA sin intervención.
+# Componentes:
+#   1) pytest          — tests unitarios (build, package_mod, narrador_server, QA instalación)
+#   2) dotnet test     — NarradorEngine xunit (28 tests .NET)
+#   3) mcs build       — compila el mod, valida 0 errores
+#   4) package_mod     — genera + valida .package DBPF
+#   5) QA instalación  — verifica archivos reales del juego en Wine, config, servidor vivo
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 FORK="$ROOT/fork"
@@ -23,12 +28,17 @@ run() {
 }
 
 cd "$ROOT"
-git init -q 2>/dev/null || true
 
-run "1) Tests Python pytest"        python3 -m pytest "$FORK/tests/" -v --tb=short
-run "2) Tests NarradorEngine xunit" dotnet test "$FORK/NarradorEngine.Server.Tests" --verbosity normal --no-restore
-run "3) Build mod mcs"             python3 "$FORK/build_mod_real.py"
-run "4) Validate .package"         python3 "$FORK/build/package_mod.py"
+run "1) Tests Python (pytest — unitarios + QA instalación)" \
+    python3 -m pytest "$FORK/tests/" -v --tb=short
+run "2) Tests NarradorEngine (xunit)" \
+    dotnet test "$FORK/NarradorEngine.Server.Tests" --verbosity normal --no-restore
+run "3) Build mod (mcs)" \
+    python3 "$FORK/build_mod_real.py"
+run "4) Validate .package (DBPF + S3SA byte-identical)" \
+    python3 "$FORK/build/package_mod.py"
+run "5) QA instalación (archivos del juego en Wine)" \
+    python3 -m pytest "$FORK/tests/test_qa_install.py" -v --tb=short
 
 echo ""
 echo "══════════════════════════════════════════════"
