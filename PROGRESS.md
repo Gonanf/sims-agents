@@ -1,6 +1,6 @@
 # PROGRESS.md — Estado del mod NarradorPorEventos (fork sims-agents)
 
-Actualizado: 2026-08-31 23:15 -03, sesión debug completa (para retomar mañana).
+Actualizado: 2026-09-01 10:20 -03, sesión P4 (Supreme IA control) + tests QA.
 
 ## Hecho y verificado
 
@@ -66,10 +66,16 @@ Actualizado: 2026-08-31 23:15 -03, sesión debug completa (para retomar mañana)
 - Probar `ZZZZ` sin `ZZZZ` prefix (`NarradorPorEventos.package`) y en subcarpeta `Packages/Test/` (Resource escanea 5 niveles).
 - Verificar `DeviceConfig.log` y `Options.ini` por flags de mods deshabilitados.
 
-### P4. Control con mod de referencia que sí carga (https://boringbones.blogspot.com/2024/05/supreme-ia-sims-autoconscientes.html)
+### P4. Control con mod de referencia que sí carga (https://boringbones.blogspot.com/2024/05/supreme-ia-sims-autoconscientes.html) ✅ Instalado 2026-09-01
 - **Qué es**: `SUPREME IA - Sims Autoconscientes` (BoringBones) — autonomy mod que desbloquea todas las interacciones del jugador (módulos `BB-SUPREME-AI` + `BB-Renaissance`). No es LLM, pero es un **control puro XML-tuning**: debería aparecer siempre en "Lista de modificaciones" si el framework escanea bien. Instrucción del autor: instalar en `Overrides/` (no `Packages/`) para optimizar carga.
-- **Uso como test**: Descargar `SUPREME IA` (Drive `1LSWMzXZ…` / V2 `1YsEKXQz…`) y ponerlo en `Los/Mods/Overrides/` junto a `ZZZZ`. Si **Supreme IA aparece** pero `ZZZZ` no → nuestro `S3SA`/`FNV64`/`comp` es el filtro (package). Si **tampoco** aparece Supreme IA → el scan de `Overrides`/`Packages` está roto globalmente (Resource/heap/Wine), no es nuestro DLL.
+- **Descarga**: Drive `1LSWMzXZ26RxzoDhjAARKSgonUV95ygbU` (V1) / `1YsEKXQzZhK18Vfe4QRMXjgIgeXoQyx9Y` (V2). 326 KB, puro XML (sin DLL/S3SA). Verificado con parser DBPF: 14 entries, TGI `45359EA7/D8957B18` ausente (XML-only).
+- **Instalado**: `Los/Mods/Overrides/BB-Supreme-AI.package` ✅ (copiado, no instalado como package — es control XML, va en Overrides).
+- **Uso como test**: Al iniciar TS3, verificar si **Supreme IA aparece** en "Lista de modificaciones" junto a `ZZZZ`. Si Supreme IA aparece pero `ZZZZ` no → nuestro `S3SA`/`FNV64`/`comp` es el filtro (package). Si **tampoco** aparece Supreme IA → el scan de `Overrides`/`Packages` está roto globalmente (Resource/heap/Wine), no es nuestro DLL.
 - **Nota**: Requiere `Classic Sims Revival` + `Get Out Project` para el modo "1 Sim controlado + resto autónomo" (`Opções > Desativar autonomia para o Sim selecionado` + `Vontade Própria Alta`). No interfiere con `NRaas StoryProgression` (alternativa más liviana, según BoringBones).
+
+### game-harness
+- Repo de game harnesses: `/home/chaos/proyectos/game-bridges/` (git no inicializado). Contiene: chess-hs, factorio, minecraft-voyager, pokeai, sc2, werewolf, + SPEC.md para streaming agentes x Kateto overlay.
+- SPEC: `POST /api/game/event` -> Kateto Event Bus -> GameBridgePlugin -> Voces -> Tool Call -> Juego. GameJournal via MemPalace.
 
 ## Contexto útil para retomar
 
