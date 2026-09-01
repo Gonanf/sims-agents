@@ -1,0 +1,143 @@
+{
+  "diretorio": {
+    "documentos_mod": "/run/media/chaos/secundario/proyectos/Games/thesims3/drive_c/users/chaos/Documents/Electronic Arts/The Sims 3/Mods/NarradorPorEventos"
+  },
+  "arquivo": {
+    "pedidos": "NarradorPorEventos.pedidos.json",
+    "respostas": "NarradorPorEventos.respostas.json",
+    "perfil_usuario": "NarradorPorEventos.perfil.usuario.json",
+    "contexto_previo": "NarradorPorEventos.contexto.previo.json",
+    "log_narrativo": "NarradorPorEventos.narrativa.log.json",
+    "log_excecoes": "NarradorPorEventos.excecoes.log.json",
+    "log_verbose": "NarradorPorEventos.verbose.log.txt",
+    "estado_sim_template": "NarradorPorEventos.estado.sim.{sim_id}.json",
+    "estado_lote_template": "NarradorPorEventos.estado.lote.{lote_id}.json",
+    "estado_familia_template": "NarradorPorEventos.estado.familia.{familia_nome}.json",
+    "estado_mundo": "NarradorPorEventos.estado.mundo.json"
+  },
+  "feature": {
+    "processamento_narrativo": true,
+    "log_verbose": true,
+    "incluir_contexto_previo": false,
+    "recursos_visuais": {
+      "cabeca_sim_fixa": true,
+      "texto_narrativo_sobre_cabeca": true
+    }
+  },
+  "intervalo": {
+    "persistencia_horas": 2.0
+  },
+  "servidor": {
+    "intervalo_poll_ms": 10000,
+    "logar_hotreload": true
+  },
+  "narrativa": {
+    "quantidade_eventos_pensamento": 5,
+    "quantidade_eventos_conto": 100,
+    "limite_resumo_pensamento": 20,
+    "limite_resumo_conto": 100,
+    "limite_caracteres_contexto": 12000
+  },
+  "perfil_usuario": {
+    "faixa_etaria": "Criança",
+    "personalidades_narrador": [
+      "ProfessorSabio",
+      "Invisivel",
+      "MaternalAcolhedor"
+    ],
+    "estilos_criativos": [
+      "Poetico",
+      "Comico",
+      "Epico"
+    ],
+    "conteudos_permitidos": [],
+    "conteudos_bloqueados": [
+      "TemasSensiveis"
+    ],
+    "diretriz": ""
+  },
+  "ollama": {
+    "url": "http://127.0.0.1:11500/api/generate",
+    "modelo": "Kateto",
+    "modelo_perfil": "",
+    "timeout_segundos": 600,
+    "opcoes": {
+      "temperature": 0.8,
+      "top_p": 0.9
+    }
+  },
+  "prompt": {
+    "variaveis": {
+      "tom_pensamento": "Menos relatório, mais autoreflexão.",
+      "tom_conto": "Menos relatório, mais jornalismo com tom sério.",
+      "diretriz_perfil_padrao": "manter estilo social-dramático de The Sims 3 com tom sério e jornalístico.",
+      "rotulo_diretriz_perfil": "Diretriz criativa do perfil do usuário",
+      "rotulo_diretriz_usuario": "Diretriz adicional do usuário",
+      "rotulo_foco_emocional": "Foco distante"
+    },
+    "contexto": {
+      "template": [
+        "{diretriz_perfil_formatada}",
+        "",
+        "{foco_emocional_formatado}",
+        "{diretriz_por_tracos}",
+        "",
+        "{contexto}"
+      ]
+    },
+    "pensamento": {
+      "template": [
+        "Você narra The Sims 3 em português brasileiro.",
+        "Escreva um pensamento interno de {sim_ativo} com voz de jogo: espontânea, viva e criativa.",
+        "Use apenas fatos do contexto. Não invente personagens, lugares, parentesco, idade ou eventos.",
+        "Respeite todos os limites numéricos e enums do contexto: idade_*, humor_*, necessidades_*, carreira_*, habilidade_* e classe_economica_*.",
+        "Não faça relatório literal de dados técnicos. Foque no sentimento e no impacto social do momento, alinhado à diretriz de perfil.",
+        "{tom_pensamento}",
+        "Não mencionar lote, mundo, enum ou números técnicos, palavras estrangeiras, se for essêncial para o pensamento traduza.",
+        "Até 220 caracteres, sem aspas e sem markdown.",
+        "{bloco_contextual}",
+        "",
+        "Pensamento de {sim_ativo}:"
+      ]
+    },
+    "conto": {
+      "template": [
+        "Você narra The Sims 3 em português brasileiro.",
+        "Escreva um conto curto sobre o momento atual de {sim_ativo} com foco social no estilo de The Sims.",
+        "Use apenas fatos do contexto. Não invente personagens, lugares, parentesco, idade ou eventos.",
+        "Respeite todos os limites numéricos e enums do contexto: idade_*, humor_*, necessidades_*, carreira_*, habilidade_* e classe_economica_*.",
+        "Use a diretriz de perfil para definir tom, humor e intensidade; em luto, conflito sensível ou tristeza, preserve respeito e sensibilidade.",
+        "Evite lista de atributos e evite repetir detalhes neutros sem impacto narrativo.",
+        "Foque no mundo, bairro, ambiente, conhecidos e não-conhecidos",
+        "Não mencionar enum ou números técnicos, palavras estrangeiras, se for essêncial para o pensamento traduza.",
+        "{tom_conto}",
+        "Até 500 caracteres, sem aspas e sem markdown.",
+        "{bloco_contextual}",
+        "",
+        "Narrativa:"
+      ]
+    },
+    "perfil": {
+      "template_geracao": [
+        "Você é um calibrador de estilo narrativo para The Sims 3 em português brasileiro.",
+        "Sua tarefa é converter escolhas de enum do usuário em uma diretriz única de escrita, clara e prática.",
+        "Retorne somente uma diretriz em texto simples, sem markdown, sem listas e sem aspas.",
+        "Não use contexto do jogo aqui; use apenas as escolhas do perfil.",
+        "Mantenha a diretriz entre 280 e 520 caracteres, com foco em voz do narrador, nível de ousadia e limites de conteúdo.",
+        "",
+        "Perfil do usuário:",
+        "- faixa_etaria: {faixa_etaria}",
+        "- personalidades_narrador: {personalidades_narrador}",
+        "- estilos_criativos: {estilos_criativos}",
+        "- conteudos_permitidos: {conteudos_permitidos}",
+        "- conteudos_bloqueados: {conteudos_bloqueados}",
+        "{diretriz_usuario_formatada}",
+        "",
+        "Diretriz narrativa final:"
+      ],
+      "template_fallback": [
+        "Narrador com personalidade [{personalidades_narrador}], estilo [{estilos_criativos}], faixa etária [{faixa_etaria}], permitido [{conteudos_permitidos}] e bloqueado [{conteudos_bloqueados}].{diretriz_usuario_sufixo}"
+      ]
+    }
+  }
+}

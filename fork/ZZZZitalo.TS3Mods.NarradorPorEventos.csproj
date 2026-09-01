@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{96CE954C-8C01-45AF-ACC3-92C9215628DC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZZZZitalo.TS3Mods.NarradorPorEventos</RootNamespace>
+    <AssemblyName>ZZZZitalo.TS3Mods.NarradorPorEventos</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Battery.Utility">
+      <HintPath>..\..\..\Documents\Electronic Arts\ReferenceAssemblies\Battery.Utility.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="mscorlib">
+      <HintPath>..\..\..\Documents\Electronic Arts\ReferenceAssemblies\mscorlib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Aplicacao\Mod\AnexarPedidoNarrativoCasoDeUso.cs" />
+    <Compile Include="Aplicacao\Mod\ConsumirRespostasNarrativasCasoDeUso.cs" />
+    <Compile Include="Aplicacao\Mod\CriarPedidoNarrativoCasoDeUso.cs" />
+    <Compile Include="Aplicacao\Mod\RegistrarContextoNarrativoPrevioCasoDeUso.cs" />
+    <Compile Include="Dominio\Compartilhado\ObjetosDeValorNarrativos.cs" />
+    <Compile Include="Dominio\Compartilhado\ModelosNarrativos.cs" />
+    <Compile Include="Dominio\Mod\ConfiguracaoModNarrativa.cs" />
+    <Compile Include="Infraestrutura\Adaptadores\AdaptadorArquivosNarrativos.cs" />
+    <Compile Include="Infraestrutura\Adaptadores\AdaptadorColecoesPorReflexaoUtil.cs" />
+    <Compile Include="Infraestrutura\Adaptadores\AdaptadorConversaoDeValores.cs" />
+    <Compile Include="Infraestrutura\Adaptadores\AdaptadorExcecoesMod.cs" />
+    <Compile Include="Infraestrutura\Adaptadores\AdaptadorVerboseDesejosDoSim.cs" />
+    <Compile Include="Infraestrutura\Adaptadores\AdaptadorJsonNarrativo.cs" />
+    <Compile Include="Infraestrutura\Adaptadores\AdaptadorTextoNarrativo.cs" />
+    <Compile Include="Infraestrutura\Adaptadores\ContratosJsonNarrativos.cs" />
+    <Compile Include="Infraestrutura\Adaptadores\LeitorPorReflexaoUtil.cs" />
+    <Compile Include="Infraestrutura\Adaptadores\NotificadorDoMod.cs" />
+    <Compile Include="NucleoNarrativo\CicloNarrativoBase.cs" />
+    <Compile Include="NucleoNarrativo\CicloNarrativoPensamento.cs" />
+    <Compile Include="NucleoNarrativo\CicloNarrativoConto.cs" />
+    <Compile Include="NucleoNarrativo\CriteriosEventosNarrativos.cs" />
+    <Compile Include="NucleoNarrativo\PoliticaFilaEventosNarrativos.cs" />
+    <Compile Include="NucleoNarrativo\PoliticasNarrativas.cs" />
+    <Compile Include="NucleoNarrativo\EscritorEstadosNarrativos.cs" />
+    <Compile Include="NucleoNarrativo\EventoNarrativo.cs" />
+    <Compile Include="NucleoNarrativo\MotorNarrativo.cs" />
+    <Compile Include="RepositorioConsulta\ConsultaAmbiente.cs" />
+    <Compile Include="RepositorioConsulta\ConsultaMundo.cs" />
+    <Compile Include="RepositorioConsulta\ConsultaCarreiraDoSim.cs" />
+    <Compile Include="RepositorioConsulta\ConsultaClasseEconomica.cs" />
+    <Compile Include="RepositorioConsulta\ConsultaContextoNarrativoDoSim.cs" />
+    <Compile Include="RepositorioConsulta\ConsultaFamiliaAtiva.cs" />
+    <Compile Include="RepositorioConsulta\ConsultaNecessidadesDoSim.cs" />
+    <Compile Include="GerenciadorPrincipalModNarracaoPorEventos.cs" />
+    <Compile Include="Infraestrutura\InfraestruturaMod.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositorioConsulta\\ConsultaHabilidadesDoSim.cs" />
+    <Compile Include="RepositorioConsulta\RepoConsulta.cs" />
+    <Compile Include="RepositorioConsulta\ConsultaDeHorario.cs" />
+    <Compile Include="RepositorioConsulta\ConsultaDesejosDoSim.cs" />
+    <Compile Include="RepositorioConsulta\ConsultaGrupoSocialDoSim.cs" />
+    <Compile Include="RepositorioConsulta\ConsultaHumorDoSim.cs" />
+    <Compile Include="RepositorioConsulta\ConsultaIdadeDoSim.cs" />
+    <Compile Include="RepositorioConsulta\ConsultaRelacionamentosDoSim.cs" />
+    <Compile Include="RepositorioConsulta\ConsultaSim.cs" />
+    <Compile Include="RepositorioConsulta\ConsultaTracosDoSim.cs" />
+    <Compile Include="ServicosDoMod\Configuracao\ConsultaConfiguracaoDoMod.cs" />
+    <Compile Include="ServicosDoMod\Contexto\ContextoParaLLM.cs" />
+    <Compile Include="ServicosDoMod\Eventos\CatalogoEventos.cs" />
+    <Compile Include="ServicosDoMod\Eventos\RepositorioEventosTheSims3.cs" />
+    <Compile Include="ServicosDoMod\Eventos\TradutorEventos.cs" />
+    <Compile Include="ServicosDoMod\Fila\ControladorFilaEventosNarrativos.cs" />
+    <Compile Include="ServicosDoMod\Repositorios\RepositorioContextoNarrativoPrevio.cs" />
+    <Compile Include="ServicosDoMod\Visuais\InfraRecursosVisuaisNarrativos.cs" />
+    <Compile Include="ServicosDoMod\Visuais\PosicionamentoOverlayNarrativo.cs" />
+    <Compile Include="ServicosDoMod\Visuais\ControladorCabecaSimFixa.cs" />
+    <Compile Include="ServicosDoMod\Visuais\ControladorTooltipNarrativoSobreCabeca.cs" />
+    <Compile Include="ServicosDoMod\Visuais\ControladorRecursosVisuaisNarrativos.cs" />
+    <Compile Include="TestesDoMod\Autoverificacoes\TesteRepositorioTiposEvento.cs" />
+    <Compile Include="TestesDoMod\Autoverificacoes\TesteRegrasRegistroNarrativo.cs" />
+    <Compile Include="TestesDoMod\Autoverificacoes\TesteContratoAcaoEExecucao.cs" />
+    <Compile Include="Dominio\Mod\AcaoDeSim.cs" />
+    <Compile Include="Dominio\Mod\CatalogoAcoesPermitidas.cs" />
+    <Compile Include="Infraestrutura\Adaptadores\AdaptadorAcaoResposta.cs" />
+    <Compile Include="Aplicacao\Mod\EjecutorDeAcciones.cs" />
+    <Compile Include="Aplicacao\Mod\AdaptadorProvedorSimsJogo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ScriptCore">
+      <HintPath>..\..\..\Documents\Electronic Arts\ReferenceAssemblies\ScriptCore.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SimIFace">
+      <HintPath>..\..\..\Documents\Electronic Arts\ReferenceAssemblies\SimIFace.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sims3GameplayObjects">
+      <HintPath>..\..\..\Documents\Electronic Arts\ReferenceAssemblies\Sims3GameplayObjects.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sims3GameplaySystems">
+      <HintPath>..\..\..\Documents\Electronic Arts\ReferenceAssemblies\Sims3GameplaySystems.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sims3Metadata">
+      <HintPath>..\..\..\Documents\Electronic Arts\ReferenceAssemblies\Sims3MetaData.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sims3StoreObjects">
+      <HintPath>..\..\..\Documents\Electronic Arts\ReferenceAssemblies\Sims3StoreObjects.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UI">
+      <HintPath>..\..\..\Documents\Electronic Arts\ReferenceAssemblies\UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".github\copilot-instructions.md" />
+    <None Include="NarradorPorEventos.config.json" />
+    <None Include="README.md" />
+    <None Include="SKILLS.md" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

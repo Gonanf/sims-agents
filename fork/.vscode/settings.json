@@ -1,0 +1,8 @@
+{
+  "dotnet.defaultSolution": "ZZZZitalo.TS3Mods.NarradorPorEventos.slnx",
+  "dotnet.server.useOmnisharp": true,
+  "testing.defaultGutterClickAction": "debug",
+  "files.encoding": "utf8",
+  "files.autoGuessEncoding": true,
+  "files.eol": "\r\n"
+}

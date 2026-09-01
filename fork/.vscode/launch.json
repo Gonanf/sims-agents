@@ -1,0 +1,48 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Server .NET 8 (servidor)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "compilar: servidor debug",
+      "program": "${workspaceFolder}/NarradorEngine.Server/bin/Debug/net8.0/NarradorEngine.Server.dll",
+      "args": [
+        "--server"
+      ],
+      "cwd": "${workspaceFolder}/NarradorEngine.Server",
+      "stopAtEntry": false,
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Server .NET 8 (simulação)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "compilar: servidor debug",
+      "program": "${workspaceFolder}/NarradorEngine.Server/bin/Debug/net8.0/NarradorEngine.Server.dll",
+      "args": [
+        "--simulate"
+      ],
+      "cwd": "${workspaceFolder}/NarradorEngine.Server",
+      "stopAtEntry": false,
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Attach ao servidor .NET 8 em execução",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickProcess}",
+      "justMyCode": true
+    },
+    {
+      "name": "Attach ao TS3 (.NET Framework 2.0)",
+      "type": "clr",
+      "request": "attach",
+      "processId": "${command:pickProcess}",
+      "justMyCode": false,
+      "requireExactSource": false
+    }
+  ]
+}

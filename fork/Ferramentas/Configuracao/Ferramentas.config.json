@@ -1,0 +1,26 @@
+{
+  "ts3": {
+    "raiz_mods": "%USERPROFILE%\\Documents\\Electronic Arts\\The Sims 3\\Mods",
+    "raiz_cache": "%USERPROFILE%\\Documents\\Electronic Arts\\The Sims 3",
+    "caminho_executavel_jogo": "%ProgramFiles(x86)%\\Electronic Arts\\The Sims 3\\Game\\Bin",
+    "argumentos_execucao_jogo": ""
+  },
+  "mod": {
+    "caminho_relativo_dll": "bin\\x86\\Debug\\ZZZZitalo.TS3Mods.NarradorPorEventos.dll",
+    "caminho_relativo_config": "NarradorPorEventos.config.json"
+  },
+  "pacote_mod": {
+    "nome_arquivo": "ZZZZITALO_NarradorPorEventos.package",
+    "tipo_recurso": "073FAA07",
+    "grupo_recurso": "00000000",
+    "instancia_recurso": "D8957B186B7324FE"
+  },
+  "ollama": {
+    "caminho_executavel": "%LOCALAPPDATA%\\Programs\\Ollama\\ollama.exe",
+    "timeout_inicializacao_segundos": 20
+  },
+  "servidor": {
+    "caminho_relativo_projeto": "NarradorEngine.Server\\NarradorEngine.Server.csproj",
+    "timeout_inicializacao_segundos": 20
+  }
+}

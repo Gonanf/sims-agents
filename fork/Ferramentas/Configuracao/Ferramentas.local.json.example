@@ -1,0 +1,15 @@
+{
+  "ts3": {
+    "raiz_mods": "%USERPROFILE%\\Documents\\Electronic Arts\\The Sims 3\\Mods",
+    "caminho_executavel_jogo": "%ProgramFiles(x86)%\\Electronic Arts\\The Sims 3\\Game\\Bin"
+  },
+  "ollama": {
+    "caminho_executavel": "%LOCALAPPDATA%\\Programs\\Ollama\\ollama.exe"
+  },
+  "servidor": {
+    "timeout_inicializacao_segundos": 30
+  },
+  "pacote_mod": {
+    "nome_arquivo": "MeuMod.package"
+  }
+}

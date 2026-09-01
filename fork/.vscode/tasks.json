@@ -1,0 +1,235 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "compilar: mod debug x86",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\Ferramentas\\Build\\compilar_mod.ps1",
+        "-RepoRoot",
+        "${workspaceFolder}",
+        "-Configuration",
+        "Debug",
+        "-Platform",
+        "x86"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": "$msCompile",
+      "group": "build"
+    },
+    {
+      "label": "compilar: servidor debug",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "${workspaceFolder}\\NarradorEngine.Server\\NarradorEngine.Server.csproj",
+        "-c",
+        "Debug",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": "$msCompile",
+      "group": "build"
+    },
+    {
+      "label": "compilar: workspace debug",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "compilar: mod debug x86",
+        "compilar: servidor debug"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "testar: servidor debug",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "test",
+        "${workspaceFolder}\\NarradorEngine.Server.Tests\\NarradorEngine.Server.Tests.csproj",
+        "-c",
+        "Debug"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": "$msCompile",
+      "group": "test"
+    },
+    {
+      "label": "testar: servidor cobertura",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "test",
+        "${workspaceFolder}\\NarradorEngine.Server.Tests\\NarradorEngine.Server.Tests.csproj",
+        "-c",
+        "Debug",
+        "--collect",
+        "XPlat Code Coverage"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": "$msCompile",
+      "group": "test"
+    },
+    {
+      "label": "validar: servidor em cópia limpa",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\Ferramentas\\Testes\\validar_servidor_limpo.ps1",
+        "-RepoRoot",
+        "${workspaceFolder}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": "$msCompile",
+      "group": "test"
+    },
+    {
+      "label": "sincronizar: config do mod",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "${workspaceFolder}\\Ferramentas\\Automacoes\\sincronizar_config_mod.bat"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "sincronizar: package do mod",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "${workspaceFolder}\\Ferramentas\\Automacoes\\atualizar_package_mod.bat"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "compilar: package do mod",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "compilar: mod debug x86",
+        "sincronizar: package do mod"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "executar: servidor",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "${workspaceFolder}\\Ferramentas\\Execucao\\rodar_servidor.bat"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "executar: servidor e ollama",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "${workspaceFolder}\\Ferramentas\\Execucao\\rodar_servidor_e_ollama.bat"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "encerrar: servidor",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "${workspaceFolder}\\Ferramentas\\Execucao\\encerrar_processos_narrativos.bat"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "encerrar: servidor e ollama",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "${workspaceFolder}\\Ferramentas\\Execucao\\encerrar_processos_narrativos.bat",
+        "-IncluirOllama"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "executar: fluxo completo TS3",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "${workspaceFolder}\\Ferramentas\\Execucao\\rodar_fluxo_completo.bat"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "executar: simulacao do servidor",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "${workspaceFolder}\\Ferramentas\\Execucao\\simular_servidor.bat"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "type": "dotnet",
+      "task": "build",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "dotnet: compilar"
+    }
+  ]
+}

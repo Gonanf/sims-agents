@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>NarradorEngine.Server.Tests</_Parameter1>
+    </AssemblyAttribute>
+    <Compile Include="..\Dominio\Compartilhado\ObjetosDeValorNarrativos.cs" Link="Dominio\Compartilhado\ObjetosDeValorNarrativos.cs" />
+    <Compile Include="..\Dominio\Compartilhado\ModelosNarrativos.cs" Link="Dominio\Compartilhado\ModelosNarrativos.cs" />
+    <None Include="..\NarradorPorEventos.config.json" Link="NarradorPorEventos.config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>
