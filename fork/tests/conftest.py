@@ -1,5 +1,10 @@
-"""Configuración pytest compartida."""
+"""pytest configuración — no toca archivos del juego real."""
 import sys
-import os
-sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parent.parent / "build"))
-sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parent.parent))
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "build"))
+
+# Evitar importación accidental de narrador_server con el config real del juego
+# durante la recolección general. Los tests de narrador_server importan explícitamente
+# el módulo y usan REAL_CFG directamente.
