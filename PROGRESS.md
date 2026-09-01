@@ -31,22 +31,25 @@ Actualizado: 2026-08-31 23:15 -03, sesión debug completa (para retomar mañana)
 ## Pendiente para mañana (plan propio, no repetir handoff)
 
 ### P0. Tests automatizados (sin intervención) ✅ Implementado 2026-09-01
-|- `run-tests.sh` en raíz del repo ejecuta TODO el suite sin intervención:
-|  - `pytest tests/` (21 tests Python: build, package_mod, narrador_server)
-|  - `dotnet test` NarradorEngine.Server.Tests (xunit, 28 tests .NET)
-|  - `python3 build_mod_real.py` (compila, valida 0 errores)
-|  - `python3 build/package_mod.py` (genera + valida .package DBPF)
+|- `run-tests.sh` en raíz del repo ejecuta TODO el suite sin intervención (5 fases):
+|  - `pytest tests/` — 32 tests Python (build, package_mod, narrador_server, QA instalación Wine)
+|  - `dotnet test` NarradorEngine.Server.Tests — xunit, 28 tests .NET
+|  - `python3 build_mod_real.py` — compila, valida 0 errores
+|  - `python3 build/package_mod.py` — genera + valida .package DBPF
+|  - QA instalación — valida ZZZZ.package en Packages, Resource.cfg, config.json, servidor llama.cpp vivo
 |- GitHub Actions `.github/workflows/tests.yml` — jobs paralelos:
 |  - `tests-python` (pytest + bun)
 |  - `tests-dotnet` (xunit)
 |  - `build-mod` (mcs + validate package)
 |  - `full-suite` (depende de los 3 anteriores)
-|- Tests nuevos creados en `fork/tests/`:
-|  - `test_build_mod_real.py`: existencia, 66 fuentes csproj, 0 errores mcs, DLL generada
-|  - `test_package_mod.py`: .package DBPF válido, validate(), idempotente, S3SA byte-identical a DLL
-|  - `test_narrador_server.py`: Config carga, interpolar, crear_prompt, sanitizar, foco, pedidos vacío
+|- Tests nuevos en `fork/tests/`:
+|  - `test_build_mod_real.py` — existencia, 66 fuentes csproj, 0 errores mcs, DLL generada
+|  - `test_package_mod.py` — .package DBPF válido, validate(), idempotente, S3SA byte-identical a DLL
+|  - `test_narrador_server.py` — Config carga, interpolar, crear_prompt, sanitizar, foco, pedidos vacío
+|  - `test_qa_install.py` — instalación real en Wine: archivos, rutas, config, servidor vivo, scriptCache
 |- Tests existentes verificados: `TesteContratoAcaoEExecucao` (mono), `TesteRegrasRegistroNarrativo`, `TesteRepositorioTiposEvento`, `TestRunnerFase1` — y `NarradorEngine.Server.Tests` xunit (28 tests).
 |- Pipeline completamente idempotente: re-ejecutar `run-tests.sh` da el mismo resultado.
+|- **Nota**: Hyprland corriente es headless (sin GPU), por lo que no se puede levantar TS3 con GUI aquí. El QA de runtime del juego se cubre vía validación de archivos + servidor vivo + smoke test del servidor. Para el debug del crash en Wine (0xAC32A / msvcr80 heap 32-bit + Store 6 GB), ver P1.
 
 ### P1. Debug con NRaas DebugEnabler (https://lizzielilyy.com/sims-3/guides/mods-cc/nraas-debugenabler-tutorial/)
 - Instalar `NRaas_DebugEnabler.package` en `Los/Mods/Packages` (framework ya ok). Habilita menú Debug en City Hall / Sim → `NRaas > DebugEnabler > ...` y logs en `Logs/ScriptError_*.xml`. Usarlo para:
